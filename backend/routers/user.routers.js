@@ -8,5 +8,6 @@ const verifytoken=require('../middlewares/verifytoken.js')
 routers.post('/register',controllers.register)
 routers.post('/login',controllers.login)
 routers.get('/demo',verifytoken ,controllers.demo)
+routers.get('/logout',verifytoken,controllers.logout)
 
 module.exports=routers

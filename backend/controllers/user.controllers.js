@@ -90,6 +90,20 @@ const demo=(req,res)=>{
   res.json({ message: "This is a protected profile page", user: req.user });
 }
 
+const logout=async(req,res)=>{
+  res.clearCookie("token",{
+    httpOnly:true,
+    sameSite:"strict",
+    secure:process.env.NODE_ENV=== "production"
+  })
+  return res.status(200).json({
+    sucess:true,
+    message:"Logged out Successfully..."
+  })
+
+ 
+}
+
 
 
 
@@ -98,5 +112,6 @@ const demo=(req,res)=>{
 module.exports={
     register,
     login,
-    demo
+    demo,
+    logout
 }
