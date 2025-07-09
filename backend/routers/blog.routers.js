@@ -10,4 +10,7 @@ router.get('/:id',verifyToken,controllers.getBlogbyId)
 router.delete('/:id',verifyToken,controllers.deleteblog)
 router.put('/:id',verifyToken,controllers.updatablog)
 
+const search_controllers=require('../controllers/search_blog.controllers.js')
+router.post('/search',verifyToken,search_controllers.search_blog)
+
 module.exports = router;
