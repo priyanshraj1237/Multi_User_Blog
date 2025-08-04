@@ -7,7 +7,7 @@ const verifytoken=require('../middlewares/verifytoken.js')
 //purpose:user_registration
 routers.post('/register',controllers.register)
 routers.post('/login',controllers.login)
-routers.get('/demo',verifytoken ,controllers.demo)
+routers.get('/demo',verifytoken,controllers.demo)
 routers.get('/logout',verifytoken,controllers.logout)
 
 module.exports=routers
