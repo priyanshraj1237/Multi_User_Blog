@@ -118,18 +118,31 @@ const demo=(req,res)=>{
   res.json({ message: "This is a protected profile page","user_detail":req.user._id});     //req.user
 }
 
-const logout=async(req,res)=>{
-  res.clearCookie("token",{
-    httpOnly:true,
-    sameSite:"strict",
-    secure:process.env.NODE_ENV=== "production"
-  })
-  return res.status(200).json({
-    sucess:true,
-    message:"Logged out Successfully..."
-  })
 
- 
+const logout=async(req,res)=>{
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $unset:{
+        refreshtoken:1
+      }
+    },
+      {
+        new:true
+      }
+    )
+    const option={
+      httpOnly:true,
+      secure:true,
+    }
+    return res
+    .status(200)
+    .clearCookie("acesstoken",option)
+    .clearCookie("refreshtoken",option)
+    .json({
+      success:true,
+      message:"user logged out sucessfull...."
+    })
 }
 
 
